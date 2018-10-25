@@ -1,0 +1,245 @@
+Hello World
+PATH=	/usr/local/share/lua/5.2/?.lua;/usr/local/share/lua/5.2/?/init.lua;/usr/local/lib/lua/5.2/?.lua;/usr/local/lib/lua/5.2/?/init.lua;./?.lua
+CPATH=	/usr/local/lib/lua/5.2/?.so;/usr/local/lib/lua/5.2/loadall.so;./?.so;/usr/local/lib/lua/5.2/lib?52.so;./lib?52.so
+LOADED=	table: 0x93ca778
+table: 0x93ca778 {
+  [package] => table: 0x93ca778 {
+                 [searchers] => table: 0x93ca858 {
+                                  [1] => function: 0x93cb2d0
+                                  [2] => function: 0x93cb2f0
+                                  [3] => function: 0x93cb310
+                                  [4] => function: 0x93cb330
+                                }
+                 [searchpath] => function: 0x8069760
+                 [loaded] => table: 0x93ca858 {
+                               *table: 0x93ca778
+                             }
+                 [loadlib] => function: 0x80693e0
+                 [cpath] => "/usr/local/lib/lua/5.2/?.so;/usr/local/lib/lua/5.2/loadall.so;./?.so;/usr/local/lib/lua/5.2/lib?52.so;./lib?52.so"
+                 [preload] => table: 0x93ca858 {
+                              }
+                 [path] => "/usr/local/share/lua/5.2/?.lua;/usr/local/share/lua/5.2/?/init.lua;/usr/local/lib/lua/5.2/?.lua;/usr/local/lib/lua/5.2/?/init.lua;./?.lua"
+                 [config] => "/
+;
+?
+!
+-
+"
+                 [loaders] => table: 0x93ca858 {
+                                *table: 0x93cb280
+                              }
+                 [seeall] => function: 0x8068f30
+               }
+  [io] => table: 0x93ca778 {
+            [output] => function: 0x80640b0
+            [type] => function: 0x8063e70
+            [input] => function: 0x80640d0
+            [close] => function: 0x80630a0
+            [stderr] => file (0xb772a980)
+            [write] => function: 0x8062f80
+            [popen] => function: 0x8063750
+            [tmpfile] => function: 0x8063f00
+            [flush] => function: 0x80636d0
+            [lines] => function: 0x80640f0
+            [read] => function: 0x8063670
+            [open] => function: 0x8063920
+            [stdout] => file (0xb772aa20)
+            [stdin] => file (0xb772aac0)
+          }
+  [debug] => table: 0x93ca778 {
+               [getinfo] => function: 0x8062600
+               [getmetatable] => function: 0x8061d70
+               [setupvalue] => function: 0x8061b90
+               [getuservalue] => function: 0x8061e20
+               [setmetatable] => function: 0x8061bd0
+               [debug] => function: 0x8061e70
+               [upvalueid] => function: 0x8062c60
+               [gethook] => function: 0x8062970
+               [setlocal] => function: 0x8062140
+               [setuservalue] => function: 0x8061cc0
+               [upvaluejoin] => function: 0x8062cb0
+               [sethook] => function: 0x8062250
+               [getregistry] => function: 0x8061ad0
+               [traceback] => function: 0x8062040
+               [getupvalue] => function: 0x8061bc0
+               [getlocal] => function: 0x8062450
+             }
+  [string] => table: 0x93ca778 {
+                [len] => function: 0x8066740
+                [sub] => function: 0x8067440
+                [format] => function: 0x8066c00
+                [lower] => function: 0x8066780
+                [match] => function: 0x80681c0
+                [byte] => function: 0x8067520
+                [char] => function: 0x8066ad0
+                [upper] => function: 0x8066450
+                [find] => function: 0x80681d0
+                [reverse] => function: 0x8066500
+                [dump] => function: 0x8067880
+                [rep] => function: 0x80665b0
+                [gsub] => function: 0x80681e0
+                [gmatch] => function: 0x8066a50
+              }
+  [table] => table: 0x93ca778 {
+               [print] => function: 0x93cea60
+               [sort] => function: 0x8066340
+               [maxn] => function: 0x8065c80
+               [pack] => function: 0x8065bc0
+               [insert] => function: 0x8065ac0
+               [unpack] => function: 0x80659a0
+               [concat] => function: 0x8065dd0
+               [remove] => function: 0x8065880
+             }
+  [coroutine] => table: 0x93ca778 {
+                   [status] => function: 0x805cfa0
+                   [running] => function: 0x805d0d0
+                   [resume] => function: 0x805d260
+                   [yield] => function: 0x805ce30
+                   [create] => function: 0x805d100
+                   [wrap] => function: 0x805d170
+                 }
+  [bit32] => table: 0x93ca778 {
+               [bnot] => function: 0x8060410
+               [extract] => function: 0x8060620
+               [band] => function: 0x8060700
+               [bxor] => function: 0x8060730
+               [rrotate] => function: 0x8060350
+               [arshift] => function: 0x8060440
+               [lshift] => function: 0x8060300
+               [bor] => function: 0x8060780
+               [btest] => function: 0x80606d0
+               [lrotate] => function: 0x80603b0
+               [rshift] => function: 0x80602b0
+               [replace] => function: 0x8060590
+             }
+  [os] => table: 0x93ca778 {
+            [time] => function: 0x8065660
+            [execute] => function: 0x8065030
+            [date] => function: 0x8065160
+            [rename] => function: 0x8064e90
+            [clock] => function: 0x8065500
+            [difftime] => function: 0x80650a0
+            [exit] => function: 0x8064fa0
+            [setlocale] => function: 0x8064e10
+            [tmpname] => function: 0x8065530
+            [getenv] => function: 0x8064f60
+            [remove] => function: 0x8064f00
+          }
+  [math] => table: 0x93ca778 {
+              [cosh] => function: 0x8064c10
+              [pow] => function: 0x80648c0
+              [atan2] => function: 0x8064c90
+              [abs] => function: 0x8064440
+              [ceil] => function: 0x80643f0
+              [acos] => function: 0x8064d30
+              [ldexp] => function: 0x8064a70
+              [deg] => function: 0x80643b0
+              [huge] => inf
+              [tan] => function: 0x8064470
+              [pi] => 3.1415926535898
+              [tanh] => function: 0x80644b0
+              [max] => function: 0x8064660
+              [sqrt] => function: 0x80644f0
+              [floor] => function: 0x8064360
+              [sin] => function: 0x8064540
+              [sinh] => function: 0x8064580
+              [rad] => function: 0x8064320
+              [asin] => function: 0x8064cf0
+              [randomseed] => function: 0x80645c0
+              [modf] => function: 0x8064920
+              [fmod] => function: 0x8064b20
+              [atan] => function: 0x8064c50
+              [min] => function: 0x80645f0
+              [log] => function: 0x8064980
+              [log10] => function: 0x8064a30
+              [frexp] => function: 0x8064ad0
+              [cos] => function: 0x8064bd0
+              [random] => function: 0x80646d0
+              [exp] => function: 0x8064b90
+            }
+  [_G] => table: 0x93ca778 {
+            [package] => table: 0x93ca308 {
+                           *table: 0x93ca858
+                         }
+            [math] => table: 0x93ca308 {
+                        *table: 0x93ccf90
+                      }
+            [type] => function: 0x8060840
+            [rawequal] => function: 0x8060d30
+            [ipairs] => function: 0x80615d0
+            [rawget] => function: 0x8060c70
+            [dofile] => function: 0x8061910
+            [bit32] => table: 0x93ca308 {
+                         *table: 0x93cb0e8
+                       }
+            [unpack] => function: 0x80659a0
+            [_G] => table: 0x93ca308 {
+                      *table: 0x93ca308
+                    }
+            [setmetatable] => function: 0x8061410
+            [loadstring] => function: 0x8061640
+            [pairs] => function: 0x80615b0
+            [error] => function: 0x8061050
+            [coroutine] => table: 0x93ca308 {
+                             *table: 0x93cb7c8
+                           }
+            [xpcall] => function: 0x80612a0
+            [rawset] => function: 0x8060c00
+            [print] => function: 0x8060d90
+            [module] => function: 0x93cb728
+            [rawlen] => function: 0x8060cd0
+            [_VERSION] => "Lua 5.2"
+            [print_r] => function: 0x93cea60
+            [arg] => table: 0x93ca308 {
+                       [-1] => "lua"
+                       [0] => "hello.lua"
+                     }
+            [tonumber] => function: 0x80608d0
+            [io] => table: 0x93ca308 {
+                      *table: 0x93cbb80
+                    }
+            [os] => table: 0x93ca308 {
+                      *table: 0x93cb958
+                    }
+            [getmetatable] => function: 0x80618a0
+            [loadfile] => function: 0x80617b0
+            [debug] => table: 0x93ca308 {
+                         *table: 0x93cc188
+                       }
+            [string] => table: 0x93ca308 {
+                          *table: 0x93cad58
+                        }
+            [tostring] => function: 0x8060890
+            [assert] => function: 0x80619b0
+            [load] => function: 0x8061640
+            [pcall] => function: 0x8061390
+            [next] => function: 0x8060ef0
+            [table] => table: 0x93ca308 {
+                         *table: 0x93cb9d0
+                       }
+            [collectgarbage] => function: 0x80610e0
+            [select] => function: 0x8060ac0
+            [require] => function: 0x93cb768
+          }
+}
+
+PRELOAD=	table: 0x93cb3b0
+table: 0x93cb3b0 {
+}
+
+LOADERS=	table: 0x93cb280
+table: 0x93cb280 {
+  [1] => function: 0x93cb2d0
+  [2] => function: 0x93cb2f0
+  [3] => function: 0x93cb310
+  [4] => function: 0x93cb330
+}
+
+SEARCH=	table: 0x93cb280
+table: 0x93cb280 {
+  [1] => function: 0x93cb2d0
+  [2] => function: 0x93cb2f0
+  [3] => function: 0x93cb310
+  [4] => function: 0x93cb330
+}
+

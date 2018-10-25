@@ -1,0 +1,199 @@
+<html >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+/*
+caseChoice  function
+1			测试隐式全局变量
+2			测试函数作用域，函数作用域有效
+3			测试块级作用域，块作用域无效
+4			测试先声明后使用原则
+5			测试==与===
+6			测试with语句可能性
+7			测试eval功能
+8			测试函数字面量
+9			测试前置与后置运算
+10			测试正负无穷
+11			测试跳转标号，continue不可以与switch语句结合使用
+12			测试前置后置与运算符优先级
+*/
+
+
+var caseChoice = 0;
+
+function f1()
+{
+	gVar = 100;
+}
+
+function f2()
+{
+	var iVal2 = 100;
+}
+
+function f3()
+{
+	alert("f3:" + iVal3);
+	if(1){
+		var iVal3 = 100;
+	}
+	alert("f3:" + iVal3);
+}
+
+var iVal4 = 4;
+
+function f5()
+{
+	alert( ('' == '0')? "'' == '0'" : "'' != '0'" );
+	alert( (0 == '')? "0 == ''" : "0 != ''" );
+	alert( (0 == '0')? "0 == '0'" : "0 != '0'" );
+	alert( (false == 'false')? "false == 'false'" : "false != 'false'" );
+	alert( (false == '0')? "false == '0'" : "false != '0'" );
+	alert( (false == undefined)? "false == undefined" : "false != undefined" );
+	alert( (false == null)? "false == null" : "false != null" );
+	alert( (null == undefined)? "null == undefiend" : "null != undefiend" );
+	alert( (' \t\r\n ' == 0)? "' \\t\\r\\n ' == 0" : "' \\t\\r\\n ' != 0" );
+	
+	alert( ('' === '0')? "'' === '0'" : "'' !== '0'" );
+	alert( (0 === '')? "0 === ''" : "0 !== ''" );
+	alert( (0 === '0')? "0 === '0'" : "0 !== '0'" );
+	alert( (false === 'false')? "false === 'false'" : "false !== 'false'" );
+	alert( (false === '0')? "false === '0'" : "false !== '0'" );
+	alert( (false === undefined)? "false === undefined" : "false !== undefined" );
+	alert( (false === null)? "false === null" : "false !== null" );
+	alert( (null === undefined)? "null === undefiend" : "null !== undefiend" );
+	alert( (' \t\r\n ' === 0)? "' \\t\\r\\n ' === 0" : "' \\t\\r\\n ' !== 0" );
+}
+
+function f6()
+{
+	var b = 1;
+	var a = 0;
+	var obj = {};
+	with (obj) {  
+        a = b;  
+    }  
+	alert('f6: a=b, a=' + a);
+	obj.b = 2;
+	with (obj) {  
+        a = b;  
+    } 
+	alert('f6: a=obj.b, a=' + a);
+	obj.a = 0;
+	with (obj) {
+        a = b;  
+    } 
+	alert('f6: obj.a=obj.b, obj.a=' + obj.a);
+	delete obj.b;
+	with (obj) {
+        a = b;  
+    } 
+	alert('f6: obj.a=b, obj.a=' + obj.a);
+}
+ 
+function f7()
+{
+	var myObject = {};
+	myObject.iVal = 1;
+	var myKey = 'iVal';
+	eval("myValue = myObject." + myKey + ";");  
+	alert("f7:myValue = " + myValue);
+	myValue1 = myObject[myKey];  
+	alert("f7:myValue1 = " + myValue1);
+}
+
+var foo = function f8() {alert("f8");};
+
+function f9()
+{
+	var i = 0;
+	var num = i++; //num=0,i=1
+	alert("f9:num=" + num + ", i=" + i);
+	i = 0;
+	num = ++i; //num=1,i=1
+	alert("f9:num=" + num + ", i=" + i);
+}
+
+function f10()
+{
+	alert(Number.POSITIVE_INFINITY);	//Infinity
+	alert(Number.NEGATIVE_INFINITY);	//-Infinity
+	alert(Number.MAX_VALUE);			//1.7976931348623157e+308
+	alert(Number.MIN_VALUE);			//5e-324
+	alert(1.7976931348623158e+308);		//1.7976931348623157e+308
+	alert(1.7976931348623159e+308);		//infinity
+}
+
+function f12()
+{
+	var a = 1;
+	var b = 2;
+	alert(-a++);		//-1
+	alert(a);			//a=2
+	//void a += b;		//error
+	void (a += b);		
+	alert(a);			//a=4
+	alert(b++-3);		//-1
+	alert(b);			//b=3
+	alert(-++b);		//-4, b=4
+}
+
+label1:switch(caseChoice){
+	case 1:
+		f1();
+		alert(gVar);
+		break;
+	case 2:
+		f2();
+		alert(iVal2);
+		break;
+	case 3:
+		f3();
+		break;
+	case 4:
+		f4();
+		break;
+	case 5:
+		f5();
+		break;
+	case 6:
+		f6();
+		break;
+	case 7:
+		f7();
+		break;
+	case 8:
+		//f8();不能成功调用f8
+		foo();  //必须先声明再使用
+		break;
+	case 9:
+		f9();
+		break;
+	case 10:
+		f10();
+		break;
+	case 11:
+		alert("11");
+		//continue label1;
+		break label1;
+	case 12:
+		f12();
+		break;
+	default:
+		alert("No Case!")
+		break;
+}
+
+//var iVal4 = 4;
+function f4(){
+	alert("f4:违背函数先声明后使用原则!");
+	alert("内部同名变量覆盖同名全局变量！f4:global:iVal4=" + iVal4);
+	var iVal4 = 100;
+	alert("f4:inner:iVal4=" + iVal4);
+}
+//var iVal4 = 4;
+
+</script>
+<body>
+
+</body>
+</html>

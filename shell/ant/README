@@ -1,0 +1,8 @@
+示例:
+Demo1-hello.xml
+ant -f hello.xml sayHelloWorld
+
+Demo2-target.xml
+ant -f target.xml targetB
+ant -f target.xml targetA
+

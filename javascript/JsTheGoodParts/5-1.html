@@ -1,0 +1,70 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+var Mammal = function (name) {
+	this.name = name;
+};
+
+Mammal.prototype.getName = function () {
+	return this.name;
+};
+
+Mammal.prototype.says = function () {
+	return this.saying || '';
+};
+
+var myMammal = new Mammal('Herb the Mammal');
+var name = myMammal.getName();
+
+
+
+var Cat = function (name) {
+	this.name = name;
+	this.saying = 'meow';
+};
+
+Cat.prototype = new Mammal('Father');
+
+Cat.prototype.purr = function (n) {
+	var i, s = '';
+	for (i = 0 ; i < n; i +=1) {
+		if (s) {
+			s += '-';
+		} 
+		s += 'r';
+	}
+	return s;
+};
+
+Cat.prototype.getName = function () {
+	return this.says() + ' ' + this.name + ' ' + this.says();
+};
+
+var myCat = new Cat('Henrietta');
+document.writeln(myCat.says());
+document.writeln(myCat.purr(5));
+document.writeln(myCat.getName());
+document.writeln(Cat.prototype.getName());
+document.writeln(myCat.__proto__.name);
+document.writeln(myCat.__proto__.getName());
+document.writeln(myCat.__proto__.says());
+document.writeln(myCat.__proto__.says);
+
+
+
+
+</script>
+</head>
+<body>
+
+
+<script language='javascript' type='text/javascript'>
+
+
+
+
+</script>
+</body>
+</html>
+

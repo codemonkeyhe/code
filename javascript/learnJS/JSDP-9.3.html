@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+var myRevealingModule = function () {
+
+    var privateVar = "Ben Cherry",
+        publicVar = "Hey there!";
+
+    function privateFunction () {
+        console.log("Name:" + privateVar);
+    }
+    
+    function publicSetName (strName) {
+        //privateName = strName; 
+        privateVar = strName;
+    }
+    
+    function publicGetName () {
+        privateFunction(); 
+    }
+    
+    return {
+        setName: publicSetName,
+        greeting: publicVar,
+        getName: publicGetName
+    };
+} ();
+
+myRevealingModule.setName("Paul Kinlan");
+console.log(myRevealingModule.greeting);
+myRevealingModule.getName();
+
+var myRevealingModule1 = function () {
+    var privateCounter = 0;
+
+    function privateFunction () {
+        privateCounter++; 
+    }
+
+    function publicFunction () {
+        publicIncrement();
+    }
+
+    function publicIncrement () {
+        privateFunction(); 
+    }
+    
+    function publicGetCount() {
+        return privateCounter;
+    }
+
+    return {
+        start: publicFunction,
+        increment: publicIncrement,
+        count: publicGetCount
+    };
+} ();
+
+myRevealingModule1.start();
+myRevealingModule1.increment();
+console.log(myRevealingModule1.count());    // 2
+
+
+</script>
+</head>
+<body>
+
+
+
+
+</script>
+</body>
+</html>
+

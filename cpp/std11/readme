@@ -1,0 +1,3 @@
+g++ -std=c++11 -o threaddemo -Wl,--no-as-needed thread.cpp -lpthread
+
+g++ -Wl,--no-as-needed -std=c++11 -pthread thread.cpp

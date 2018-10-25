@@ -1,0 +1,226 @@
+<html >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+/*
+caseChoice  function
+1			设置对象属性、获取对象属性
+2			测试对象的同一个引用
+3			检测原型链属性与对象属性，枚举对象属性
+4			测试对象属性屏蔽原型链同名属性
+5			了解构造函数
+6			了解原型
+7			了解原型链继承
+8			了解原型链设置继承的先后关系
+9			了解Object.prototype
+10			function表达式
+*/
+
+
+var caseChoice = 0;
+
+function f1()
+{
+	var flight = {};
+	var status = flight.status || "unknown";  
+	alert(status);					// "unknown"
+	status = flight.status ? flight.status : "unknown";    //等价写法  
+	alert(status);					// "unknown"
+	var equipment = flight.equipment && flight.equipment.model;  
+	alert(equipment);				// undefined
+    equipment = flight.equipment ? flight.equipment.model : undefined;    //等价写法  
+	alert(equipment);				// undefined
+	flight.equipment = {model: "model"};
+	equipment = (flight.equipment) ? flight.equipment.model : undefined;    
+	alert(equipment);				// model
+	alert(flight.equipment.model );	// model
+}
+
+function f2()
+{
+	var a = b = c = {};  
+	a.val = 1;
+	alert(b.val);		// 1
+	alert(c.val);		// 1
+}
+
+function f3()
+{
+	var flight = {};
+	alert(typeof flight.toString);       // 'function'  
+	alert(typeof flight.constructor);    // 'function' 
+	flight.number = 3;
+	alert(flight.hasOwnProperty('number'));          //true  
+    alert(flight.hasOwnProperty('constructor'));    //false  
+	
+	var name;  
+	var obj = flight;
+    for (name in obj){  
+        if (typeof obj[name] !== 'function') {  
+            alert(name + ': ' + obj[name]);  
+        }  
+    }  
+}
+
+function f4()
+{
+	var obj = {};
+	alert(obj.constructor);
+	obj.constructor = 1;
+	alert(obj.constructor);		//1
+	delete (obj.constructor);
+	alert(obj.constructor);
+}
+
+function f5(){
+	function Test() {
+		this.a = "hello";
+	}
+	var test = new Test(); // 由Test构造函数创建
+	alert(test.constructor);
+	var o = { a: "hello" };
+	//实际相当于
+	var o_ = new Object();
+	o_.a = "hello"; // 由Object构造函数创建
+	alert(o.constructor);
+}
+
+//参照：http://www.cnblogs.com/FlyingCat/archive/2009/09/21/1570656.html
+function f6()
+{
+	// prototype默认为new Object(); 为了方便, 记为p_obj
+	function Person(name) {
+		this.name = name;
+	}
+
+	// 为 p_obj 增加 sayName 属性
+	Person.prototype.sayName = function(){
+		alert(this.name);
+	}
+
+	var john = new Person("John"); // john 的 base reference指向p_obj
+	var eric = new Person("Eric");  // eric 的 base reference也是指向p_obj
+
+	// 注意sayName代码中的this将指向实例化后的对象(this绑定)
+	john.sayName(); // john对象本身没有sayName属性, 于是访问原型对象p_obj的sayName属性
+	eric.sayName(); // 访问同一个原型对象p_obj的sayName属性
+	
+	var tmp = Person.prototype;
+	tmp.boss = "David";
+	// 于这个运行点, p_obj已经被修改
+	// 根据上述属性访问流程, 新的修改(boss属性)能反映到所有的实例, 包括已经创建和即将创建的
+	alert("John's boss is " + john.boss);
+	alert("Eric's boss is " + eric.boss);
+	// hisCar和sayCar属性将增加到john对象而不是p_obj对象..
+	john.hisCar = "Audi";
+	john.sayCar = function(){
+		alert(this.name + " has a car of " + this.hisCar);
+	}
+	john.sayCar();
+	// ..因此下一句将错误, 因为eric对象本身和原型p_obj都没有sayName属性
+	 //eric.sayCar(); 
+}
+
+//参照：http://www.cnblogs.com/FlyingCat/archive/2009/09/21/1570656.html
+function f7()
+{
+	function Superman() {}
+	Superman.prototype.sayHello = function(){
+		alert("I'm a superman.");
+	}
+
+	function SupermanCan(skill){
+		this.skill = skill;
+	}
+	// 为prototype赋予Superman的实例..
+	SupermanCan.prototype = new Superman();
+	// ..再动态添加新的属性
+	SupermanCan.prototype.sayMore = function(){
+		this.sayHello(); // 调用"父类"的方法
+		alert("I can " + this.skill);
+	}
+	var david = new SupermanCan("fly");
+	// output: I'm a superman. I can fly
+	david.sayMore();
+}
+
+//参照：http://www.cnblogs.com/FlyingCat/archive/2009/09/21/1570656.html
+function f8()
+{
+	var f1 = {echo: function() { alert("sound"); } };
+	function Foo() {};
+	var foo = new Foo(); // foo的基引用指向Object实例
+	Foo.prototype = f1;
+	/* 未定义, 因为这是"foo对象自己或者基引用指向的对象有echo属性吗?"
+	   而不是"foo对象自己或者Foo.prototype指向的对象有echo属性吗?" */
+	alert(foo.echo);
+	var foo2 = new Foo(); // foo2的基引用指f1对象
+	foo2.echo(); // output: sound
+}
+
+//参照：http://www.cnblogs.com/FlyingCat/archive/2009/09/21/1570656.html
+function f9()
+{
+	Object.prototype.echo = function() {
+		alert("hello");
+	}
+	// echo属性将增加到所有对象固有对象和自定义对象
+	var arr = new Array();
+	arr.echo();
+	Array.echo();
+	function ObjCons()    {
+		this.dummy = "d";
+	}
+	var obj = new ObjCons();
+	obj.echo();
+	ObjCons.echo();
+}
+
+function f10(){
+	(function  (){
+		alert("123");
+	}());
+}
+
+label1:switch(caseChoice){
+	case 1:
+		f1();
+		break;
+	case 2:
+		f2();
+		break;
+	case 3:
+		f3();
+		break;
+	case 4:
+		f4();
+		break;
+	case 5:
+		f5();
+		break;
+	case 6:
+		f6();
+		break;
+	case 7:
+		f7();
+		break;
+	case 8:
+		f8();
+		break;
+	case 9:
+		f9();
+		break;
+	case 10:
+		f10();
+		break;
+	default:
+		alert("No Case!")
+		break;
+}
+
+
+
+</script>
+<body>
+
+</body>
+</html>

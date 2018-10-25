@@ -1,0 +1,42 @@
+<html >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+
+var obj = {name: 'jack'}
+var arr = [1,2,3]
+var reg = /hello/g
+var date = new Date
+var err = new Error('exception')
+var num = 123;
+var bol = false;
+var fn = function(){};
+
+document.writeln(obj.__proto__ === Object.prototype) // true
+document.writeln(arr.__proto__ === Array.prototype)  // true
+document.writeln(reg.__proto__ === RegExp.prototype) // true
+document.writeln(date.__proto__ === Date.prototype)  // true
+document.writeln(err.__proto__ === Error.prototype)  // true
+document.writeln(num.__proto__ === Number.prototype)  // true
+document.writeln(bol.__proto__ === Boolean.prototype)  // true
+document.writeln(fn.__proto__ === Function.prototype)  // true
+
+
+function Person(name) {
+    this.name = name
+}
+// 修改原型
+Person.prototype.getName = function() {}
+var p = new Person('jack')
+document.writeln(p.__proto__ === Person.prototype) // true
+document.writeln(p.__proto__ === p.constructor.prototype) // true
+document.writeln(p.constructor === Person);
+
+
+
+
+</script>
+<body>
+
+</body>
+</html>

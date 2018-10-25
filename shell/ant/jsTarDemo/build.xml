@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+ant 压缩流程：  
+1、target init 进行初始化处理，创建一个目录build，用于暂存文件；  
+2、target concat 合并若干个js文件，并替换一些调试信息，合并结果all.js放到 build 目录下；  
+3、target compress 调用 Yui Compressor 对合并后的 js 进行压缩,支持js优化，变量名混淆替换等功能  
+4、target tarjs 进行清理动作，删除中间生成的 build 临时目录  
+
+参考文档：
+ANT官方手册：  http://ant.apache.org/manual/          
+YUI Compressor: http://developer.yahoo.com/yui/compressor/#work  
+replaceregexp: http://ant.apache.org/manual/Tasks/replaceregexp.html  
+replaceregexp, 正则表达式替换，将断点标识替换为空  
+-->  
+
+<project name="Javascript Tar" default="tarjs" basedir=".">  
+<description>Make tar for js</description>  
+
+<property name="srcPath" location="js"/>  
+<property name="buildDir" location="build"/>  
+<property name="desPath" location="result"/>  
+<property name="lib" location="lib"/>  
+<property name="charset" value="utf-8"/>  
+
+<target name="init">  
+    <mkdir dir="${buildDir}" />  
+</target>  
+
+<target name="concat" depends="init">  
+    <echo message="start concat" />  
+    <concat destfile="${buildDir}/all1.js" encoding="${charset}" outputencoding="${charset}">  
+        <path path="${srcPath}/init.js" />  
+        <path path="${srcPath}/start.js" />  
+        <path path="${srcPath}/utils.js" />  
+    </concat>  
+    <replaceregexp match="debugger;" replace="" flags="g" byline="true" file="${buildDir}/all1.js" encoding="${charset}" />  
+    <concat destfile="${buildDir}/all2.js" encoding="${charset}" outputencoding="${charset}">  
+        <path path="${srcPath}/init.js" />  
+        <path path="${srcPath}/utils.js" />  
+    </concat>  
+    <replaceregexp match="\$.breakPoint\(\);" replace="" flags="g" byline="true" file="${buildDir}/all2.js" encoding="${charset}" />  
+    <echo message="end concat" />  
+</target>  
+
+<target name="compress" depends="concat">
+    <echo message="start compress" />  
+    <java jar="${lib}/yuicompressor-2.4.8.jar" fork="true" failonerror="false">  
+        <arg line="--type js --charset ${charset} --nomunge --preserve-semi ${buildDir}/all1.js -o ${desPath}/res1.js" />  
+    </java>  
+    <java jar="${lib}/yuicompressor-2.4.8.jar" fork="true" failonerror="false">  
+        <arg line="--type js --charset ${charset} --disable-optimizations  ${buildDir}/all2.js -o ${desPath}/res2.js" />  
+    </java>  
+    <echo message="end compress" />  
+</target>  
+
+<target name="tarjs" depends="compress">  
+    <delete dir="${buildDir}"/>  
+</target>  
+
+</project> 
+
+

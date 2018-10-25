@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script language='javascript' type='text/javascript'>
+
+var str = "<h2 class='<%=played%>'><%=sVideoName%></h2>'asdfadsf%>";
+console.log(str);
+//str.replace(/[\r\t\n]/g, " ").replace(/'(?=[^%]*%>)/g, "\t").split("'").join("\\'").split("\t").join("'").replace(/<%=(.+?)%>/g, "',$1,'").split("<%").join("');").split("%>").join("p.push('");
+var res = str.replace(/[\r\t\n]/g, " ").replace(/'(?=[^%]*%>)/g, "#\t");
+console.log(res);
+//o = {valueOf : function(v){return 1}}; console.log(++o); 
+</script>
+
+</head>
+<body id="body">
+<h1 id='h3' name='test'><h2 id='tt' name='test'>TEST</h2></h1>
+
+<div id="d1"  class="abv ss ">
+    <p><a href="#">SINA</a></p>
+</div>
+
+
+
+
+<script language='javascript' type='text/javascript'>
+
+var $={};
+
+$.E = function(s) {
+    return document.getElementById(s);
+};
+
+
+$.each = function(arr, func) {
+        Array.prototype.forEach.call(arr, func);
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
+

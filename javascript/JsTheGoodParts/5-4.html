@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+Function.prototype.method = function(name, func) {
+		this.prototype[name] = func;
+	return this;
+};
+
+var myMammal = {
+	name:"Herb the Mammal",
+	getName: function () {
+		return this.name;
+	},
+	says: function () {
+		return this.saying || '';
+	}
+};
+
+var myCat = Object.create(myMammal);
+myCat.name = "Henrietta";
+myCat.saying = 'meow';
+myCat.purr = function(n) {
+	var i, s = '';
+	for (i = 0 ; i < n; i +=1) {
+		if (s) {
+			s += '-';
+		} 
+		s += 'r';
+	}
+	return s;	
+};
+
+myCat.getName = function() {
+	return this.says() + ' ' + this.name + ' ' + this.says();
+};
+
+
+
+console.log(myCat.says());
+console.log(myCat.purr(5));
+console.log(myCat.getName());
+console.log(myCat.__proto__ ===myMammal);
+console.log(myCat.name);
+delete myCat.name;
+console.log(myCat.name);
+delete myCat.__proto__.name;
+console.log(myCat.name);
+
+
+</script>
+</head>
+<body>
+
+
+<script language='javascript' type='text/javascript'>
+
+
+
+
+</script>
+</body>
+</html>
+

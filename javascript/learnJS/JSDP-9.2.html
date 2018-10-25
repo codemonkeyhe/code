@@ -1,0 +1,141 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+var myModule = {
+    myProperty: "someValue",
+
+    myConfig: {
+        useCaching: true,
+        languate: "en"
+    },
+
+    myMethod: function () {
+        console.log("Where in the world is Paul Irish today?");
+    },
+    
+    myMethod2: function () {
+        console.log("Caching is:" + (this.myConfig.useCaching)? "enabled" : "disabled");   
+    },
+
+    myMethod3: function (newConfig) {
+        if (typeof newConfig === "object") {
+            this.myConfig = newConfig;
+            console.log(this.myConfig.language);
+        }
+    },
+}; 
+
+myModule.myMethod();
+
+myModule.myMethod2();
+
+myModule.myMethod3({
+    language: "fr",
+    useCaching: false
+});
+
+
+var testModule = (function () {
+            var counter = 0;
+            return {
+                incrementCounter: function () {
+                    return ++counter;
+                },
+                resetCounter: function() {
+                    console.log("counter value prior to reset: " + counter);
+                    counter = 0;
+                }   
+            };
+})();
+
+testModule.incrementCounter();
+testModule.resetCounter();
+
+
+var basketModule = (function () {
+    var basket = [];
+
+    return {
+        addItem: function (values) {
+            basket.push(values);
+        },
+
+        getItemCount: function () {
+            return basket.length;
+        },
+        
+        getTotal: function () {
+            var itemCount = this.getItemCount(),
+            total = 0;
+            while (itemCount--) {
+                total += basket[itemCount].price;
+            }
+            return total;
+        }
+    };
+})();
+
+
+basketModule.addItem({
+    item: "bread",
+    price: 0.5
+});
+
+
+basketModule.addItem({
+    item: "butter",
+    price: 0.5
+});
+
+console.log(basketModule.getItemCount());
+console.log(basketModule.getTotal());
+console.log(basketModule.basket);
+
+/*
+var myModule2 = (function (jQ, _) {
+        function privateMethod1 () {
+            jQ(".container").html("test");
+        }
+
+        function privateMethod2 () {
+            console.log(_.min([10, 5, 100, 2, 1000]));
+        }
+        return {
+            publicMethod: function () {
+                privateMethod1();
+            } 
+        };
+})(jQuery, _);
+
+myModule2.publicMethod();
+*/
+
+var myModule1 = (function () {
+    var module = {}, privateVariable = "Hello World";
+
+    function privateMethod() {}
+
+    module.publicProperty = "Foobar";
+    module.publicMethod = function () {
+        console.log(privateVariable); 
+    };
+    return module;
+})();
+
+myModule1.publicMethod();       // Hello World
+document.writeln(myModule1.publicProperty);   // FooBar
+
+
+</script>
+</head>
+<body>
+
+
+
+
+</script>
+</body>
+</html>
+

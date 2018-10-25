@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <title>onclick vs ontouchstart</title>
+  <style type="text/css">
+  *{
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+  body{
+    margin: 0 auto;
+    width: 80%;
+  }
+  a{
+    border: 1px solid #333;
+    color: #333;
+    display: block;
+    margin: 10px auto;
+    text-decoration: none;
+    padding: 10px;
+    -webkit-border-radius: 10px;
+  }
+  a#touchstartcss:active,
+  #reset:active,
+  a.active{
+    background: #666;
+    color: #EEE;
+  }
+  #reset{
+    float: right;
+  }
+
+  .excBug {
+    background: #000000;
+    color: yellow;
+  }
+  </style>
+</head>
+<body>
+<strong id="notouchstart">This device does not support touchstart.</strong>
+<div id='fa'>
+<a href="javascript:;" id="click">Click</a>
+</div>
+<a href="javascript:;" id="touchstart">touchstart</a>
+<a href="javascript:;" id="touchstartcss">touchstart w/ css</a>
+<a href="javascript:;" ontouchstart="reset()" id="reset">Reset</a>
+<div id="delay_report"></div>
+<script type="text/javascript">
+
+var touchable = 'ontouchstart' in window;
+var $ = window.$ || {};
+window.TOUCHS = touchable ? 'touchstart' : 'mousedown';
+window.TOUCHM = touchable ? 'touchmove' : 'mousemove';
+window.TOUCHE = touchable ? 'touchend' : 'mouseup';
+window.TOUCHC = touchable ? 'touchcancel' : 'mouseup';
+window.tapIndicator = 1;
+window.$ = $;
+
+var tap = function (el, tapHandler, startHandler, endHandler) {
+    var moveDistance = 0;
+    el.addEventListener(TOUCHS, function (e) {
+            moveDistance = 0;
+            startHandler && startHandler(e);
+            var cancleEvent = setTimeout(function() {
+                cancleEvent = 0;
+                }, 200);
+            el.addEventListener(TOUCHM, function (e) {
+                moveDistance++;
+                if( moveDistance >= 2 )
+                $.breakPoint();
+                el.removeEventListener(TOUCHM, arguments.callee, false);
+                }, false);
+            el.addEventListener(TOUCHE, function (e) {
+                if (moveDistance < window.tapIndicator && cancleEvent !== 0) {
+                clearTimeout(cancleEvent);
+                cancleEvent = 0;
+                tapHandler && tapHandler(e);
+                } else {
+                console.log("TAP: CancleEvent " + moveDistance + " " + JSON.stringify(cancleEvent));
+                }
+                endHandler && endHandler(e);
+                el.removeEventListener(TOUCHE, arguments.callee, false);
+                }, false);
+    }, false);
+};
+
+$.tap = tap;
+
+
+
+var a=document.getElementById('click'),b=document.getElementById('touchstart'),c=document.getElementById('touchstartcss'),d=document.getElementById('delay_report'),start=0;
+var f=document.getElementById('fa');
+//Check for touchstart
+if('ontouchstart' in document.documentElement || 'ontouchstart' in window) {
+  document.getElementById("notouchstart").style.display = "none";
+}
+
+//Add a listener that fires at the beginning of each interaction
+//[a,b,c].forEach(function(el){el.addEventListener('touchstart',interact);});
+[a,b,c].forEach(function(el){ $.tap(el, interact);});
+
+//Add the event handlers for each button
+//a.addEventListener('click',highlight);
+//b.addEventListener('touchstart',highlight);
+//c.addEventListener('touchstart',highlight);
+
+//Functions
+//Store the time when the user initiated an action
+function interact(e) {
+    start = new Date();
+    //f.innerHTML='<a href="http://www.baidu.com" id="ccc">CCC</a>';
+    f.innerHTML='<a href="#" id="ccc">CCC</a>';
+    document.getElementById('ccc').addEventListener('click', abug, false);
+    //setTimeout(delayFunc,0);
+}
+
+function delayFunc () {
+    document.getElementById('ccc').addEventListener('click', abug, false);
+}
+
+function abug(e) {
+    e.currentTarget.className = "excBug"; 
+}
+
+/*
+//Highlight what the user selected and calculate how long it took the action to occur
+function highlight(e) {
+  e.preventDefault();
+  e.currentTarget.className="active";
+  if(start) {d.innerHTML = "Delay: " + ((new Date()) - start) + "ms";}
+  start = null;
+}
+*/
+//Reset the demo
+function reset() {
+  [a,b,c].forEach(function(el){el.className="";d.innerHTML=""});
+}
+</script>
+
+</body>
+</html>

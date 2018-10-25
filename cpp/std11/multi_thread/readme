@@ -1,0 +1,1 @@
+g++ -std=c++11 -o thread1  -Wl,--no-as-needed thread1.cpp -lpthread

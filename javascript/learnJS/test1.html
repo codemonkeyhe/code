@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+function saveLoadErr(d, b) {
+	var a = localStorage.getItem("jException") || "";
+	var c = null;
+    var s = d.srcElement ? d.srcElement : d.target;
+    var e = s.href || s.src;
+	//var e = d.srcElement.href || d.srcElement.src;
+	if (a && a.length > 0) {
+		c = JSON.parse(a)
+	}
+	if (c == null || typeof c.sJException == "undefined") {
+		c = {
+			sJException: []
+		}
+	}
+	var f = {};
+	f.args = [];
+	f.callStack = "";
+	f.errorMessage = "";
+	f.hash = window.location.hash;
+	f.host = window.location.host;
+	f.timeStamp = new Date().toString();
+	f.type = b;
+	if (e) {
+		f.args.push(e)
+	}
+	c.sJException.push(f);
+	console.log(f);
+	localStorage.setItem("jException", JSON.stringify(c))
+}
+
+
+
+</script>
+</head>
+<body>
+<h1 id='h3' name='test'><h2 id='click' name='test'>TEST</h2></h1>
+
+<script language='javascript' type='text/javascript'>
+
+var obj = document.getElementById("click");
+
+obj.addEventListener("click", function(e) {
+        alert("You click me!");
+        saveLoadErr(e, "CSS加载异常")
+    }, false);
+
+
+
+
+</script>
+</body>
+</html>
+

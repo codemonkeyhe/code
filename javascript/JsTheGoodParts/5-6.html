@@ -1,0 +1,83 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+
+var eventuality = function (that) {
+       var registry = {};
+       that.fire = function (event) {
+              //在一个对象上触发一个事件。该事件可以是一个包含事件名称的字符串，
+              //或者是一个拥有包含事件名称的type属性的对象。
+              //通过'on'方法注册的事件处理程序中匹配事件名称的函数将被调用。
+              var array, func, handler, i,
+                  type = typeof event === 'string'? event : event.type;
+              //如果这个事件存在一组事件处理程序，那么就遍历它们并按顺序依次执行
+              if (registry.hasOwnProperty(type)) {
+                     array = registry[type];
+                     for ( i = 0 ; i < array.length; i += 1){
+                            handler = array[i];
+                            //每个处理程序包含一个方法和一组可选的参数。
+                            //如果该方法是一个字符串形式的名字，那么寻找该函数
+                            func = handler.method;
+                            if(typeof func === 'string'){
+                                   func = this[func];
+                            }
+                            //调用一个处理程序。如果该条目包含参数，那么传递它们过去。否则，传递该事件对象
+                            func.apply(this,handler.parameters||[event]);
+                     }
+              }
+              return this;
+       };
+
+       that.on = function (type, method, parameters) {
+              //注册一个事件。构造一条处理程序条目。将它插入到处理程序数组中，
+              //如果这种类型的事件还不存在，就构造一个
+              var handler = {
+                  method: method,
+                  parameters: parameters
+              };
+              if (registry.hasOwnProperty(type)) {
+                     registry[type].push(handler);
+              } else {
+                 registry[type]=[handler];
+              }
+              return this;
+       };
+       return that;
+};
+
+
+var obj = {
+    myAlert:function(){
+        alert('my origin alert');
+    },
+    show: function (p1, p2){
+        alert(p1+p2);      
+    }
+
+};
+
+var demo = eventuality(obj);
+demo.on('news', function(){ alert('hello world');});
+demo.on('news', function(){ alert('hello boy');});
+demo.on('stringFunc', 'myAlert');
+demo.on('callshow', 'show',  ["abc",'def']);
+demo.fire('news');
+demo.fire('stringFunc');
+demo.fire('callshow');
+
+</script>
+</head>
+<body>
+
+
+<script language='javascript' type='text/javascript'>
+
+
+
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+Function.prototype.method = function(name, func) {
+		this.prototype[name] = func;
+	return this;
+};
+
+function ls(obj)
+{
+	console.log(obj);
+}
+
+var myMammal = {
+	name:"Herb the Mammal",
+	getName: function () {
+		return this.name;
+	},
+	says: function () {
+		return this.saying || '';
+	}
+};
+
+var c = {}, d = {};
+c.__proto__ = myMammal;
+d.__proto__ = myMammal; 
+ls(c.name);
+ls(d.name);
+c.__proto__.name= "ProtoName";
+ls(c.name);
+ls(d.name);
+ls(myMammal.name);
+c.name = 'SelfName';
+ls(c.name);
+ls(d.name);
+delete c.__proto__.name;
+ls(c.name);
+ls(d.name);
+
+</script>
+</head>
+<body>
+
+
+<script language='javascript' type='text/javascript'>
+
+
+
+
+</script>
+</body>
+</html>
+

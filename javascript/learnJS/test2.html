@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script language='javascript' type='text/javascript'>
+
+
+</script>
+
+</head>
+<body>
+<h1 id='h3' name='test'><h2 id='click' name='test'>TEST</h2></h1>
+
+<div id="d1">
+    <p><a href="http://www.sina.com.cn">SINA</a></p>
+</div>
+
+
+
+
+<script language='javascript' type='text/javascript'>
+
+
+    function $(id){
+        return document.getElementById(id);}
+    var d1 = $('d1');
+    var obj1 = d1.querySelector('div a');
+    var obj3 = document.querySelector('div a');
+    var obj2 = d1.querySelectorAll('div a');
+    console.log(obj1); // -> http://www.sina.com.cn/
+    console.log(obj2); // -> 1 
+    console.log(obj3);
+</script>
+
+
+
+</body>
+</html>
+

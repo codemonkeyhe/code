@@ -1,0 +1,212 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script language='javascript' type='text/javascript'>
+
+
+</script>
+
+</head>
+<body id="body">
+<h1 id='h3' name='test'><h2 id='tt' name='test'>TEST</h2></h1>
+
+<div id="d1"  class="abv ss ">
+    <p><a href="#">SINA</a></p>
+</div>
+
+
+
+
+<script language='javascript' type='text/javascript'>
+
+var $={};
+
+$.E = function(s) {
+    return document.getElementById(s);
+};
+
+
+$.each = function(arr, func) {
+        Array.prototype.forEach.call(arr, func);
+}
+
+
+//testCase 1 
+/*
+$.each([{name:"ss", id:1},{name:"dd", id:2},{name:"vv", id:3}], function(element, index, array){    console.log("["+ index + "]=" + element.name);
+        });
+
+
+function logArrayElements(element, index, array) {
+    console.log("a[" + index + "] = " + element);
+}
+
+[2, 5, 9].forEach(logArrayElements);
+*/
+
+/*
+var str = "agc123!@#";
+var res = /\W/.test(str);
+console.log(res);
+*/
+
+
+$.isNullOrEmpty = function(obj) {
+    if (typeof obj == "undefined") return true;
+
+    if (obj == null) return true;
+
+    if (typeof obj == "string" && obj.length == 0) return true;
+
+    return false;
+}
+
+/*
+console.log($.isNullOrEmpty([]));  // F
+console.log($.isNullOrEmpty({}));  // F
+console.log($.isNullOrEmpty(''));  // true
+console.log($.isNullOrEmpty(NaN)); // F
+*/
+
+/*
+var res = function (){
+return a = "asd";
+}();
+console.log(res);   //asd
+*/
+
+/*
+var d = document.getElementById("d1"); 
+var res = function () {
+    return d.setAttribute("name", "center");
+}();
+console.log(res);    //undefined
+*/
+
+/*
+console.log(document.getElementById("body").tagName);
+*/
+
+$.classRE = function(name) {
+    return new RegExp("(^|\\s)" + name + "(\\s|$)")
+};
+
+
+
+
+
+$.breakPoint = function() {
+    try {
+        throw new Error("Break Point");
+    } catch(ex) {
+    }
+};
+
+$.hasClass = function(ele, name) {
+    if (!ele) {
+        return false;
+    }
+    return $.classRE(name).test(ele.className);
+}
+
+/*
+console.log($.hasClass($.E("d1"), "ss"))
+*/
+//$.breakPoint();
+//alert(1);
+
+/*
+var err = new Error("WWW"); 
+throw(err);
+*/
+
+/*
+var ss={inde:true,ss:false};
+if(ss["ind"] == true)
+    console.log("true");
+*/
+
+    /*
+    解释url上面的Request参数
+    */
+
+    var getRequestObj = function() {
+        var url = location.search; //获取url中"?"符后的字串,至#截止
+        var theRequest = {};
+        if (url.indexOf("?") != - 1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+/*
+var res = getRequestObj();
+console.log(res);
+*/
+
+/*
+var a={2:{a:"asd"},3:{b:"cc"}};
+console.log(a[2].a);
+var c=a[2];
+c.a="bbbb";
+console.log(a[2].a);
+
+
+var t=Date.now();
+
+console.log(t);
+*/
+
+
+/*
+var ss = {b:true};
+console.log(ss['a']===true);
+console.log(ss['b']===true);
+*/
+
+/*
+var it = 1;
+switch (it) {
+    case 1:
+    case 3:
+        alert(1);
+        break;
+    case 2,4:
+        alert(2);
+        break;
+    default:
+        alert(3);
+}
+*/
+
+
+/*
+document.getElementbyId('d1').addEventListener('click', function() {
+            alert("123");
+        }, false);
+*/
+
+
+
+document.getElementById('tt').addEventListener('click', function() {
+            alert("234");
+        },false );
+
+ document.getElementById('tt').addEventListener('click', function() {
+            alert("234");
+        },false );
+
+
+
+</script>
+
+
+
+</body>
+</html>
+

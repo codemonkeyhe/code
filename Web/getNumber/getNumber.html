@@ -1,0 +1,166 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script  type='text/javascript' src='./jquery-2.1.1.js'></script>
+<script language='javascript' type='text/javascript'>
+</script>
+</head>
+<body id="body">
+
+<h1 id='ttt' name='test'><h2 id='tt' name='test'>TEST</h2></h1>
+<button id="SB">Stop interval</button>
+<div id="RES"  class="abv ss ">
+   <ul id="list"></ul>
+</div>
+
+<script language='javascript' type='text/javascript'>
+$("#SB").bind('click', function(){
+    alert("请先选择号码归属！");
+	stop=window.clearInterval(stop);
+	cc.sort();
+	var res=[];
+	 var hash = {}, len = cc.length;
+	 for (var i = 0; i < len; i++){
+		 if (!hash[cc[i]]){
+			 hash[cc[i]] = true;
+			 res.push(cc[i]);
+		 } 
+	 }
+	//$('#list').append("<li>"+JSON.stringify(cc)+"</li>");
+	$('#list').append("<li>去重结果："+JSON.stringify(res)+"</li>");
+});
+
+
+$('#tt').bind('click',function(){
+	alert("test");
+});
+
+function isEmpty(str) {
+	return typeof str === 'undefined'
+		|| str === 'undefined|undefined' || str === null
+		|| str === '' || str === '|';
+};
+	
+// 选号参数，未指定使用默认值
+var params = {
+	cityCode :  "540",
+	province : "51",
+	q_p :  "51",
+	mid : "5100000",
+	cityName :  "深圳",
+	groupKey : "",
+	rankMoney : "66", //66  //386 //286
+	net :"01",
+	Show4GNum: "",
+	// 是否支持免预存
+	isPreStore : "",
+	// 号码来源
+	hasSharePool : true,
+	hasGroup :  false,
+	// 是否支持自定义号码
+	customSearchSupport : true
+};
+
+
+function getConfigKey() {
+	return null === params.province || "" === params.province || null === params.cityCode
+		|| "" === params.cityCode ? "11110" : params.province + params.cityCode;
+}
+
+
+ var ProvincePoolConf = {
+	"11110" : "100",
+	"51510" : "100",
+	"38380" : "100",
+	"51540" : "100",
+	"31310" : "100",
+	"34340" : "50",
+	"38390" : "50",
+	"38480" : "50",
+	"85850" : "50",
+	"34450" : "50",
+	"36360" : "50",
+	"71710" : "50",
+	"76760" : "50",
+	"81810" : "50",
+	"81831" : "50",
+	"84845" : "50",
+	"00000" : "10"
+};
+
+
+// 弹出号码选择框
+if (params.cityCode === "" || params.cityName === "") {
+	alert("请先选择号码归属！");
+}
+
+//$("#roleSel").val(),
+// $("#preFeeSel").val(),
+//getKeyValue($("#keySearch").val()),
+function queryParams(hasSharePool) {
+	var queryParam = {
+		province : params.province,
+		cityCode : params.cityCode,
+		rankMoney : params.rankMoney,
+		groupKey : params.groupKey,
+		mid : params.mid,
+		q_p : params.q_p,
+		net : params.net,
+		roleValue : "",
+		preFeeSel : "0",
+		keyValue : "",
+		Show4GNum : params.Show4GNum
+	}
+	if (hasSharePool) {
+		queryParam.groupKey = "";
+	}
+	return queryParam;
+}
+
+
+  
+var queryP = queryParams(true);
+var confkey = getConfigKey();
+var confvalue = isEmpty(ProvincePoolConf[confkey]) ? ProvincePoolConf["00000"]
+	: ProvincePoolConf[confkey];
+window.cc=[];
+function jsonp_queryMoreNums(data){
+	var ss=0;
+	var dd=[];
+	var dataCompress = data['moreNumArray'];
+	for ( var i = 0; i < dataCompress.length; i += 7) {
+		if(dataCompress[i].toString().indexOf('4')==-1 && dataCompress[i+1]==0)
+			dd.push(dataCompress[i]);
+	}
+	//dd.sort();
+	cc=cc.concat(dd);
+	//cc+=JSON.stringify(dd);
+	$('#list').append("<li>"+JSON.stringify(dd)+"</li>");
+	//console.log(cc);
+}
+
+	
+function sendajax(){
+	 $.ajax({// 查询普通或分组号码
+		type : "get",
+		async : false,
+		url : "http://num.10010.com/NumApp/GoodsDetail/queryMoreNums",
+		data : $.param(queryP) + "&q_p="+ parseInt(Math.random() * confvalue + 1) + "&_=" + new Date().getTime(),
+		dataType : "jsonp",
+		jsonp : "callback",
+		jsonpCallback : "jsonp_queryMoreNums",
+		success : function(data) {
+			//showNumbers(dataDecompress(data));
+	
+				//console.log(dd);
+		}
+	});
+}
+
+var stop=setInterval("sendajax()", 1000);
+
+</script>
+
+</body>
+</html>
+

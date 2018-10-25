@@ -1,0 +1,16 @@
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\obj\Debug\ResolveAssemblyReference.cache
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\obj\Debug\SQLcontC.Form1.resources
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\obj\Debug\SQLcontC.Properties.Resources.resources
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\obj\Debug\SQLcontC.csproj.GenerateResource.Cache
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\bin\Debug\SQLcontC.exe
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\bin\Debug\SQLcontC.pdb
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\obj\Debug\SQLcontC.exe
+E:\Visual Studio 2008\Projects\SQLcontC\SQLcontC\obj\Debug\SQLcontC.pdb
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\obj\Debug\SQLcontC.exe
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\obj\Debug\SQLcontC.pdb
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\bin\Debug\SQLcontC.exe
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\bin\Debug\SQLcontC.pdb
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\obj\Debug\SQLcontC.Form1.resources
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\obj\Debug\SQLcontC.Properties.Resources.resources
+C:\Users\LittleMouse\Desktop\SQLcontC\SQLcontC\obj\Debug\SQLcontC.csproj.GenerateResource.Cache

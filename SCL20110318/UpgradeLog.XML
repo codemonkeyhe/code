@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SCL20110318">
+</Property><Property Name="Solution File" Value="E:\VS2008Projects\SCL20110318\SCL20110318.sln">
+</Property><Property Name="User Options File" Value="E:\VS2008Projects\SCL20110318\SCL20110318.suo">
+</Property><Property Name="Date" Value="2011年6月26日">
+</Property><Property Name="Time" Value="12:31">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="SCL20110318.sln" Description="File successfully backed up as E:\VS2008Projects\SCL20110318\SCL20110318.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="SCL20110318.suo" Description="File successfully backed up as E:\VS2008Projects\SCL20110318\SCL20110318.suo.old">
+</Event><Event ErrorLevel="0" Project="SCL20110318" Source="SCL20110318\SCL20110318.vcproj" Description="Converting project file 'E:\VS2008Projects\SCL20110318\SCL20110318\SCL20110318.vcproj'.">
+</Event><Event ErrorLevel="1" Project="SCL20110318" Source="SCL20110318\SCL20110318.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="SCL20110318" Source="SCL20110318\SCL20110318.vcproj" Description="Done converting to new project file 'E:\VS2008Projects\SCL20110318\SCL20110318\SCL20110318.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="SCL20110318" Source="SCL20110318\SCL20110318.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SCL20110318.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="SCL20110318.sln" Description="Converted">
+</Event></UpgradeLog>

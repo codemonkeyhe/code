@@ -1,0 +1,106 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include <iostream>
+#include <string>
+#include <functional>
+
+#include "zlog.h"
+
+using namespace std;
+using namespace std::placeholders;
+
+#define  logInfo(s) cout << "["<<__FILE__<<":"<<__LINE__<<": "<<__FUNCTION__<<"] " << s << endl;
+
+
+int f(int, char, double);
+
+int main()
+{
+
+
+    cout << "hello" << endl;
+    //f(1, 'c', 3.14);
+    //auto ff = bind(f, _1, 'c', 1.2);
+    //int x = ff(6);
+
+    //auto frev = bind(f, _3, _2, _1);
+    //int rev= frev(1.2, 'c', 7);
+
+    //auto f2=bind<int>(f, 7, 'c', _1);
+    //int xx = f2(1.2);
+    //f(7, 'c', 1.2)
+
+		zlog_category_t* zcHiveLog;
+		zlog_category_t* zcRollLog;
+		zlog_category_t* zcDayLog;
+		zlog_category_t* zcMdcLog;
+		zlog_category_t* zcMdcDayLog;
+
+
+    int iRet = zlog_init("./zlogRule.conf");
+    if (iRet != 0)
+    {
+        std::cout << "zlog_init err "<< std::endl;
+        exit(-1);
+    }
+    zcHiveLog = zlog_get_category("YY_HIVE_LOG");
+    if (!zcHiveLog)
+    {
+        std::cout << "zlog_get_category YY_HIVE_LOG err " << std::endl;
+        exit(-3);
+    }
+    zcRollLog = zlog_get_category("YY_ROLL_LOG");
+    if (!zcRollLog)
+    {
+        std::cout << "zlog_get_category YY_ROLL_LOG err " << std::endl;
+        exit(-3);
+    }
+    zcDayLog = zlog_get_category("YY_DAY_LOG");
+    if (!zcDayLog)
+    {
+        std::cout << "zlog_get_category YY_DAY_LOG err " << std::endl;
+        exit(-3);
+    }
+    zcMdcLog = zlog_get_category("YY_MDC_LOG");
+    if (!zcMdcLog)
+    {
+        std::cout << "zlog_get_category YY_MDC_LOG err " << std::endl;
+        exit(-3);
+    }
+    zcMdcDayLog = zlog_get_category("YY_MDC_DAY_LOG");
+    if (!zcMdcDayLog)
+    {
+        std::cout << "zlog_get_category YY_MDC_DAY_LOG err " << std::endl;
+        exit(-3);
+    }
+    zlog_info(zcRollLog, "hello, noOOOOOOOOOO  mdc");
+    zlog_info(zcDayLog, "hello, noOOOOOOOOOO  mdc");
+    zlog_info(zcHiveLog, "hello, noOOOOOOOOOO  mdc");
+
+    zlog_info(zcMdcLog, "hello, noOOOOOOOOOO  mdc");
+    zlog_put_mdc("LOGNAME", "func1");
+    zlog_info(zcMdcLog, "hello, noOOOOOOOOOO  iDDDDDDDDDDD");
+    zlog_put_mdc("ID", "2222222222");
+    zlog_info(zcMdcLog, "hello, SERVER log");
+
+    zlog_clean_mdc();
+    zlog_put_mdc("LOGNAME", "func2");
+    zlog_put_mdc("ID", "XXX3333XXXX");
+    zlog_info(zcMdcDayLog, "hello, day log");
+
+
+    zlog_fini();
+
+
+    return 0;
+}
+
+
+int f(int i, char c, double d)
+{
+    char buffer[200];
+    sprintf(buffer, "1st=%d, 2nd=%c 3rd=%f", i, c, d);
+    string str(buffer);
+    logInfo(str);
+    return 0;
+}

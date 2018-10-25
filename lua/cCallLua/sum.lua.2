@@ -1,0 +1,12 @@
+-- local cjson = require("cjson"); 两种方法都可以，同下面
+local cjson = require "cjson"
+function add(x, y)
+    local obj = {
+        name = "dennis",
+        age = 18
+    };
+
+    local jsonStr = cjson.encode(obj);
+    print(jsonStr);
+    return x+y;
+end

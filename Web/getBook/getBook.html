@@ -1,0 +1,182 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<script  type='text/javascript' src='./jquery-2.1.1.js'></script>
+<script language='javascript' type='text/javascript'>
+</script>
+</head>
+
+
+<body id="body">
+
+<h1 id='ttt' name='test'>TEST</h1>
+<button id="SB">Stop interval</button>
+<div id="res1"></div>
+<div id="res2"></div>
+<div id="res"  class="abv ss ">
+ 
+</div>
+
+<script language='javascript' type='text/javascript'>
+$("#SB").bind('click', function(){
+	alert("请先选择号码归属！");
+});
+
+
+
+
+function jsonpCallback(data) //回调函数
+{
+   // $('#list').html(data);
+}
+
+
+var dis = function (){
+    var link3="";
+    var time;
+    var stop;
+    return {
+        setlink : function(s){
+            link3 = s;
+            console.log("data= " + link3);
+        },
+        settime : function (t) { time=t},
+       senda : function() {
+             if (link3=="epub") {
+                console.log("invalid data");
+                return;
+             }
+
+             $.ajax({
+                type : "get",
+                async : false,
+                cache : false,
+                crossDomain: true,
+                url : link3,
+                data : {},
+                dataType : "html",
+                //dataType : "jsonp",
+                //jsonp : "callback",
+                //jsonpCallback : "jsonpCallback",
+                success : function(data) {
+                //请求成功时处理
+                    //showNumbers(dataDecompress(data));
+                    //alert(jQuery.type(data));
+                    //alert(data)
+                   // console.log(data);
+                   var result = jQuery.parseHTML(data);
+                   var href=  $(result).eq(2).attr("href")
+                    console.log(href);
+                  //$('#res1').append(result);
+               //    alert($(result).html())
+                   //var doc = (new DOMParser()).parseFromString(data)
+                   //alert(dia+"epub")
+                        //console.log(dd);
+                        
+                                    // alert($(data))
+                    //$('#res1').append($(data));
+                    //var href= $('#res1 a:first').attr("href");
+                    //console.log(href);
+                    //alert(href)
+                    //$('#res1 a:first').click()
+                     window.open(href)
+                    //window.clearInterval(stop);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.error('error'); 
+                    console.error(XMLHttpRequest.status);
+                    console.error(XMLHttpRequest.readyState);
+                    console.error(textStatus);
+                },
+            });
+       },
+       sed : function() {
+            stop=setInterval(this.senda, time)
+       }
+    }
+};
+
+
+var link1 = "link1";
+function sendajax(){
+	 $.ajax({// 查询普通或分组号码
+		type : "get",
+		async : false,
+        cache : false,
+        crossDomain: true,
+		url : "http://bbs.feng.com/forum.php",
+		//data : {"mod": "viewthread", "tid":10421470, "fromuid":6725878},
+        //data : {"mod": "viewthread", "tid":10447157, "fromuid":6725878},
+        //data : {"mod": "viewthread", "tid":10446546, "fromuid":6725878},
+        //data : {"mod": "viewthread", "tid":10443095, "fromuid":6725878},
+        //data : {"mod": "viewthread", "tid":10446362, "fromuid":6725878},
+        data : {"mod": "viewthread", "tid":10451016, "fromuid":6725878},
+		dataType : "html",
+        //dataType : "jsonp",
+		//jsonp : "callback",
+		//jsonpCallback : "jsonpCallback",
+		success : function(data) {
+        //请求成功时处理
+            //alert(jQuery.type(data));
+           var result = jQuery.parseHTML(data);
+           $('#res').append(result);
+           
+   			$('#res ignore_js_op span a').each(function(index, ele){
+                console.log(index);
+				var clickd = $(this).attr("onclick");
+                 console.log($(this).text());
+				var be = clickd.indexOf("plugin");
+				var en = clickd.indexOf("epub");
+				var dia = clickd.substr(be,  en-be);
+				 dia+="epub";
+				 link1=dia; 
+                 console.log(link1);
+                 //$('#res2').append("<ul>"+dia+"</ul>");
+				 var se=dis();
+                 se.setlink(dia);
+                 se.settime(index * 1000);
+                 se.senda();
+                 //se.sed();
+                 //$.sleep(1 * index, se.senda())
+                 //setInterval("se.senda()", 1000 * index);
+              //  setTimeout(function () {   }, 1000);
+                 
+			});
+			
+          // alert($('#attach_11828047 > a').text());
+           //alert($('#attach_11828047 > a').attr("onclick"));
+		   
+           //var click = $('#attach_11828047 > a').attr("onclick");
+           //var be = click.indexOf("plugin")
+           //var en = click.indexOf("epub")
+           //var dia = click.substr(be,  en-be);
+           //dia+="epub";
+      //     link1=dia; 
+		},
+        complete: function() {
+        //请求完成的处理
+            //alert('done'); 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.error('error'); 
+            console.error(XMLHttpRequest.status);
+            console.error(XMLHttpRequest.readyState);
+            console.error(textStatus);
+       },
+	});
+}
+
+ sendajax()
+ 
+
+ //alert(link1);
+ //sendajax1(link1);
+  
+//alert("123")
+
+</script>
+
+</body>
+</html>
+

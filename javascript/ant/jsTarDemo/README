@@ -1,0 +1,8 @@
+依赖Yui compressor 来压缩js
+
+示例:
+Demo-build.xml
+ant init
+ant concat
+ant compress
+ant clean

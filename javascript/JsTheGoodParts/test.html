@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language='javascript' type='text/javascript'>
+
+var add = function (a, b) {
+    return a + b;
+};
+
+Function.prototype.method = function (name, func) {
+    if (!this.prototype[name]) {
+        this.prototype[name] = func;
+    }
+    return this;
+};
+
+Function.method('curry', function () {
+    var slice = Array.prototype.slice;
+    var args = slice.apply(arguments);
+    var that = this;
+    return function () {
+        return add.apply(null, args.concat(slice.apply(arguments)));
+    };
+});
+
+var add1 = add.curry(1);
+document.writeln(add1(6));
+
+</script>
+</head>
+<body>
+<h1 id='h1' name='test1'></h1>
+<h1 id='h2' name='test2'></h1>
+<h1 id='h3' name='test'><h2 id='childh2' name='test'></h2></h1>
+<h1 id='h4' name='test'></h1>
+<h1 id='h5' name='test5'></h1>
+<h1 id='h6' name='test6'></h1>
+
+<script language='javascript' type='text/javascript'>
+
+
+
+
+</script>
+</body>
+</html>
+
