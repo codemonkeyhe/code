@@ -31,7 +31,22 @@ root.isMember("anything-not-exist"); //true
 http://jsoncpp.sourceforge.net/class_json_1_1_value.html#da6ba1369448fb0240bccc36efaa46f7
 
 * */
-    if (true) {
+    if (1) {
+        string test ="{\"id\":2147483648 ,\"name\":\"kurama\"}"; 
+
+        Json::Reader reader; 
+        Json::Value value(Json::objectValue); 
+        if(reader.parse(test,value)) { 
+            if(value.isMember("id") && value["id"].isUInt()) { 
+                cout << "UINT=" << value["id"].asUInt() << endl; 
+            } 
+            if(value.isMember("id") && value["id"].isInt()) { 
+                cout << "INT=" << value["id"].asInt() << endl; 
+            } 
+        } 
+    }
+
+    if (1) {
         Json::Value v;  
         //v["appkey"] = "1234";
         v["appkey"].append("test");
@@ -164,7 +179,7 @@ http://jsoncpp.sourceforge.net/class_json_1_1_value.html#da6ba1369448fb0240bccc3
         std::string out = root.toStyledString();
         std::cout << out << std::endl;
     }
-    if (false) {
+    if (0) {
         string test ="{\"id\":1,\"name\":\"kurama\"}"; 
         Json::Reader reader; 
         Json::Value value; 
@@ -176,10 +191,10 @@ http://jsoncpp.sourceforge.net/class_json_1_1_value.html#da6ba1369448fb0240bccc3
         } 
         // Json::FastWriter用来快速输出Json对象的值
         Json::FastWriter writer;
-        cout << writer.write(value)<< std::endl;
+        cout << writer.write(value) << " next-line" << std::endl;
         //Json::StyledWriter用来格式化输出Json对象的值。
         Json::StyledWriter writer2;
-        std::cout << writer2.write(value) << std::endl;
+        std::cout << writer2.write(value) << "next-line" << std::endl;
     }
 
     if (false) {

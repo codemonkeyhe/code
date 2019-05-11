@@ -1,7 +1,7 @@
 test: test.o
-	g++ -g -O3 -std=c++0x  -Wall -o test test.o  -ljson_linux-gcc-4.8_libmt   -I/usr/local/include/json/
+	g++ -g -O3 -std=c++0x  -Wall -o test test.o  -ljson_linux-gcc-4.6_libmt   -I/mnt/hgfs/gitPro/code/cpp/jsonDemo/jsoncpp-0.10.6/include/
 test.o: test.cpp
-	g++ -g -O3 -std=c++0x  -Wall -c test.cpp   -ljson_linux-gcc-4.8_libmt  -I/usr/local/include/json/ 
+	g++ -g -O3 -std=c++0x  -Wall -c test.cpp   -ljson_linux-gcc-4.6_libmt  -I/mnt/hgfs/gitPro/code/cpp/jsonDemo/jsoncpp-0.10.6/include/
 
 all: 
 	make clean; make
