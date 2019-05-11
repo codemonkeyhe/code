@@ -136,7 +136,26 @@ const char* f() {
 }
 
 
+
+string PurifyString(const string &str) {
+    string::iterator it;
+    string res = str; 
+    for (it = res.begin(); it != res.end(); ++it) {
+        if (*it == ':') {
+            *it = '-'; 
+        }    
+    }    
+    return res;
+}
+
+
+
 int main() {
+    cout << "begin test" << endl;
+    string ss = "XXXXXXX:XXXX:XXXX";
+    cout << PurifyString(ss) << endl;
+
+
     //pp(t, i);
     //make_test(pp, i);
 
@@ -147,7 +166,7 @@ int main() {
     //cout << DUPLICATE_KEY_UPDATE_VER(cid, 0) << endl;
     //cout << DUPLICATE_KEY_UPDATE_VER(cid, 1) << endl;
     //
-
+    if (0) {
     string msg;
     msg = "query-";
     const char * str = f();
@@ -156,10 +175,10 @@ int main() {
     str = f();
     if (str != NULL)
         msg += str;
-
     cout << msg << endl;
+    }
 
-    if (1) {
+    if (0) {
         volatile int i = 3;
         int j = 0;
         j = (i++) + (++i) + (i++);
