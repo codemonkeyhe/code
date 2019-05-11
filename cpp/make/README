@@ -1,0 +1,19 @@
+
+make -f Makefile.env
+
+https://stackoverflow.com/questions/16931770/makefile4-missing-separator-stop
+
+makefile has a very stupid relation with tabs, all actions of every rule are identified by tabs ...... 
+and No 4 spaces don't make a tab, only a tab makes a tab.
+to check I use the command 
+cat -e -t -v makefile_name
+
+It shows the presence of tabs with ^I and line endings with $ both are vital
+
+
+
+切换空格
+set et 
+set noet 
+set et ?
+
