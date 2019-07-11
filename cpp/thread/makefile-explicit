@@ -1,0 +1,9 @@
+all: threadAjB
+
+CFLAGS=-I/usr/include/nptl -D_REENTRANT
+LDFLAGS=-L/usr/lib/nptl -lpthread
+
+clean:
+	rm -f threadAjB
+
+
